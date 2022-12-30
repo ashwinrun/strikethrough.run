@@ -527,13 +527,15 @@ h4 {
 .textbox {
   width: 100%;
   /* max-width: 800px; */
-  /* height: 600px; */
+  /* height: 400px; */
+  /* overflow-y: auto; */
   height: auto;
   border: none;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 30px;
   box-sizing: border-box;
+  line-height: 150%;
 }
 
 del {
@@ -546,6 +548,7 @@ del {
 
 ins {
   text-decoration: none;
+  background: rgb(255,255,0,.3);
   /* font-weight: bold; */
 }
 
@@ -553,6 +556,21 @@ ins {
   text-align: center;
 }
 
+.features.demo section {
+  max-width: 600px;
+  /* width: calc(50%-10px); */
+  flex: 1;
+}
+
 .features.demo section p {
   margin-top: 0;
+}
+
+.features.demo {
+  /* justify-content: space-around;
+  align-items: center; */
+}
+
+p.footnote {
+  font-size: 90%;
 }
