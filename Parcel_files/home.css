@@ -11,6 +11,10 @@ body {
   margin-top: -20px;
 }
 
+.filepond--root {
+  font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 h1,
 h2,
 h3,
@@ -556,25 +560,26 @@ ins {
   /* font-weight: bold; */
 }
 
-.features.demo h3 {
+.features.sample h3, .features.demo h3 {
   text-align: center;
 }
 
-.features.demo section {
+.features.sample section {
   max-width: 600px;
   /* width: calc(50%-10px); */
   flex: 1;
 }
 
-.features.demo section p {
+.features.sample section p {
   margin-top: 0;
-}
-
-.features.demo {
-  /* justify-content: space-around;
-  align-items: center; */
 }
 
 p.footnote {
   font-size: 90%;
+}
+
+.button.submit {
+  background: #21374b;
+  color: white;
+  margin: auto;
 }

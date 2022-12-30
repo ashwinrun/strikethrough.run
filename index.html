@@ -9,8 +9,9 @@
     <meta property="og:description" content="Host your content.">
     <meta property="og:image" content="https://atalk.run/assets/lightning.svg">
     <title>strikethrough</title>
-    <link type="text/css" rel="stylesheet" href="./Parcel_files/home.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./Parcel_files/hljs-github.min.css">
+    <link type="text/css" rel="stylesheet" href="./Parcel_files/home.css">
     <link rel="shortcut icon" href="./assets/lightning.svg" type="image/x-icon">
     <base target="_parent" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -66,6 +67,26 @@
 
     <div class="features demo">
       <section>
+        <h3>Try a Demo</h3>
+        <div class="textbox" id="input">
+          <p>
+            <input type="file" id="file"/>
+          </p>
+          <div class="button-container">
+            <a class="button submit disabled" href="#" id="submit">Strikethrough</a>
+          </div>
+        </div>
+      </section>
+      <!-- <section>
+        <h3>After strikethrough</h3>
+        <div class="textbox" id="output">
+          <p></p>
+        </div>
+      </section> -->
+    </div>
+
+    <div class="features sample">
+      <section>
         <h3>Sample document: law review article</h3>
         <div class="textbox" id="input">
           <p>The frontier myth generates a sense of constant renewal and innovation, technological progress, commoditization of property, upliftment of democratic values, and a composite notion of American identity.<sup>4</sup> It is thus unsurprising that Turner’s observation that “the frontier has gone” is only true in a literal sense, confined to the end of western expansion.<sup>5</sup> The frontier myth has driven and justified far more than just western expansion and American Indian genocide. It is echoed in the waging of American overseas wars, the creation of the America-led liberal world order, and American leadership in technological progress and scientific innovation.<sup>6</sup></p>
@@ -92,7 +113,7 @@
     </div>
 
 
-    <div class="features demo">
+    <div class="features sample">
       <section>
         <h3>Sample document: legal brief</h3>
         <div class="textbox" id="input">
@@ -195,6 +216,32 @@
     </footer>
 
     <script src="./Parcel_files/icons.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script>
+      var submit = document.getElementById("submit");
+      var file = null;
+      FilePond.create(document.getElementById("file"), {
+        credits: false,
+        dropOnPage: true,
+        onaddfile: function(error, f) {
+          file = f;
+          submit.classList.remove("disabled");
+        },
+        onremovefile: function(error, f) {
+          file = null;
+          submit.classList.add("disabled");
+        }
+      });
+      submit.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (!file) {
+          return;
+        }
+        // submit.
+        window.location = "https://calibre-ebook.com/downloads/demos/demo.docx";
+        
+      })
+    </script>
   
 
 </body></html>
