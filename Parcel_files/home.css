@@ -276,6 +276,10 @@ main > section {
   width: 500px;
 }
 
+#pricing {
+  margin-top: 60px;
+}
+
 #pricing .features section {
   width: 333px;
 }
