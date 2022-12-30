@@ -1,3 +1,3 @@
-# ashwin.run
+# strikethrough.run
 
-Website for [https://ashwin.run](https://ashwin.run).
+Website for [https://strikethrough.run](https://strikethrough.run).
