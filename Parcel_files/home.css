@@ -518,3 +518,41 @@ h4 {
   font-weight: normal;
   line-height: 1.5em;
 }
+
+#upload {
+
+
+}
+
+.textbox {
+  width: 100%;
+  /* max-width: 800px; */
+  /* height: 600px; */
+  height: auto;
+  border: none;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+del {
+  color: rgb(255,0,0,.5);
+}
+
+.smallcaps {
+  font-variant: small-caps;
+}
+
+ins {
+  text-decoration: none;
+  /* font-weight: bold; */
+}
+
+.features.demo h3 {
+  text-align: center;
+}
+
+.features.demo section p {
+  margin-top: 0;
+}
