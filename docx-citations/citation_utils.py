@@ -1,6 +1,7 @@
-from docx import Document
 from io import BytesIO
 from random import randint
+from docx import Document
+import spacy
 
 class CitationFixer:
     def __init__(self):
@@ -30,8 +31,6 @@ class SimpleNLPCitationFixer(CitationFixer):
         self.min_paragraph_length = 10
         self.nlp = spacy.load("en_core_web_sm")
     def get_citations(self):
-        print("inside get_citations nlp")
-        print("len[self.citations]:", len(self.citations))
         for i in range(len(self.document.paragraphs)):
             text = self.document.paragraphs[i].text
             if len(text) >= self.min_paragraph_length:
@@ -47,5 +46,4 @@ class SimpleNLPCitationFixer(CitationFixer):
                             # ensuring that there is a ( before the year (distinguishing it from cases
                             # there is a year but not for the purpose of a citation)
                             self.citations[i].append((start_char, end_char))
-#                             print("last character:")
 #                             print("citation:", text[start_char:end_char+1])
