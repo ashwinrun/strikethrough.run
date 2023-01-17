@@ -22,3 +22,5 @@ save_document(path)
 Determining how to represent the citations in the class is open-ended. We can include footnote citations, although that will require a bit of research / engineering, since python-docx doesn’t directly have support for extracting footnotes. Our citations can be random substrings of paragraphs. They can be encoded by (paragraph number, start index, (exclusive) end index). For now, we can just do <= 1 random substring per paragraph.
 
 As seen in docx2python test.ipynb, we can actually view footnotes (although they may not be in order)
+
+conda install -c conda-forge spacy
