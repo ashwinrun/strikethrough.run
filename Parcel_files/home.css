@@ -583,3 +583,16 @@ p.footnote {
   color: white;
   margin: auto;
 }
+
+#input-citation,#output-citation {
+  border: 1px solid black;
+  padding: 5px;
+}
+.button.submit button {
+  display: inline;
+}
+
+a.button.disabled {
+  pointer-events: none;
+  background: #666;
+}

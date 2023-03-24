@@ -49,6 +49,37 @@
     </header>
 
     <main>
+
+      <div class="features demo">
+        <section>
+          <h3>Demo</h3>
+          <div class="textbox">
+            <form id="cite-form">
+            <div id="input-citation" contenteditable>
+              
+            </div><br />
+            <div class="button-container">
+              <a class="button submit st" href="#" onclick="submit">Strikethrough</a>
+              <a class="button submit clear" href="#">Clear</a>
+            </div><br />
+            <div id="output-citation" contenteditable>
+
+            </div>
+            <div id="output-explanation">
+
+            </div>
+            </form>
+          </div>
+        </section>
+        <!-- <section>
+          <h3>After strikethrough</h3>
+          <div class="textbox" id="output">
+            <p></p>
+          </div>
+        </section> -->
+      </div>
+
+
       <div class="features">
         <section>
           <h3>✍🏽 Correct your citations</h3>
@@ -66,7 +97,7 @@
     </main>
 
     <div class="features demo">
-      <section>
+      <section style="display: none">
         <h3>Try a Demo</h3>
         <div class="textbox" id="input">
           <p>
@@ -214,7 +245,8 @@
         <a href="https://github.com/epicfaace/strikethrough.run" >open source</a>.
       </div>
     </footer>
-
+<script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/showdown@2/dist/showdown.min.js"></script>
     <script src="./Parcel_files/icons.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script>
@@ -242,6 +274,75 @@
         
       })
     </script>
+
+<script>
+    const tests = [
+      [
+        `Anthony J. Gaughan, Illiberal Democracy: The Toxic Mix of Fake News, Hyperpolarization, and Partisan Election Administration, 12 DUKE J. CONST. L. &amp; PUB. POL’Y 57, 59 (2017)`,
+        `Anthony J. Gaughan, Illiberal Democracy: The Toxic Mix of Fake News, Hyperpolarization, and Partisan Election Administration, 12<span style="font-variant-caps: small-caps;"> Duke J. Const. L. & Pub. Pol’y </span>57, 59 (2017)`
+      ]
+    ];
+    function longest(arr) {
+      return arr.reduce((a, b) =>  a.length > b.length ? a : b);
+    }
+    function titleCase(str) {
+      return str.toLowerCase()
+      .replace(/\b\w/g, s => s.toUpperCase())
+      // Pol’Y to Pol’y
+      .replace(/([’'"])([A-Z])/g, (_, delim, letter) => delim + letter.toLowerCase());
+    }
+    const converter = new showdown.Converter();
+    function transform(input) {
+      // TODO: html to markdown and back
+      let output = input.replace(/&amp;/g, "&")
+      console.log('transform', output);
+      {
+        const matches = output.match(/[A-Z. '’&]+/g);
+        if (matches && matches.length) {
+          const match = longest(matches);
+          if (match.length >= 5) {
+            output = output.replace(match, `<span style="font-variant-caps: small-caps;">${titleCase(match)}</span>`);
+          }
+        }
+      }
+      output = `<span id='docs-internal-guid-3399e362-7fff-32e2-cd50-7045fbe7b34d'>${output}</span>`
+      console.log("output", output);
+      return output;
+    }
+    for (let i = 0; i < tests.length; i++) {
+      const [input, output] = tests[i];
+      const out = transform(input);
+      if (out !== output) {
+        console.error(`Assertion failed for index${i}:\n\tgot: ${out}\n\texp: ${output}\n\tinp: ${input}`);
+        // throw "error!";
+      }
+    }
+  $("#cite-form .submit").click(async function(e) {
+    e.preventDefault();
+    const input = $("#input-citation")[0].innerHTML;
+    $(".submit.st").addClass("disabled").text("Loading...");
+    $("#output-citation").html(output);
+    const response = fetch('https://oto0203kc0.execute-api.us-east-2.amazonaws.com/dev/strikethrough', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(e => e.json());
+    $("#output-citation").html(response.citation);
+    $("#output-explanation").html(`
+    <strong>Reasoning:</strong><br>${response.reasoning}<br><br>
+    <strong>Unsure about:</strong><br>${response.unsure}<br><br>
+    `);
+    $(".submit.st").removeClass("disabled").text("Strikethrough");
+  })
+  $("#cite-form .clear").click(function(e) {
+    e.preventDefault();
+    $("#input-citation").text("");
+    $("#output-citation").text("");
+    $("#output-explanation").text("");
+  });
+</script>
   
 
 </body></html>

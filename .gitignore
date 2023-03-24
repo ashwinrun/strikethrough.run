@@ -1,0 +1,4 @@
+**.docx
+venv
+node_modules
+.serverless
